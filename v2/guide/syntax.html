@@ -160,6 +160,7 @@
     <li><a href="https://kr.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">한국어</a></li>
     <li><a href="https://br.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">Português</a></li>
     <li><a href="https://fr.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">Français</a></li>
+    <li><a href="https://vi.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">Tiếng Việt</a></li>
   </ul>
 </li>
 
@@ -254,6 +255,7 @@
     <li><a href="https://kr.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">한국어</a></li>
     <li><a href="https://br.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">Português</a></li>
     <li><a href="https://fr.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">Français</a></li>
+    <li><a href="https://vi.vuejs.org/v2/guide/syntax.html" class="nav-link" target="_blank">Tiếng Việt</a></li>
   </ul>
 </li>
 
@@ -844,7 +846,12 @@
 <div class="content guide with-sidebar syntax-guide">
   
     
-      
+      <div id="ad">
+  <a href="https://time.geekbang.org/?utm_source=website&utm_medium=vue&utm_campaign=routine&utm_content=tuijian" target="_blank" rel="nofollow">
+    <img src="/images/geekbang.jpg" alt="极客时间">
+  </a>
+</div>
+
     
   
   
@@ -859,15 +866,32 @@
 <p>Mustache 标签将会被替代为对应数据对象上 <code>msg</code> 属性的值。无论何时，绑定的数据对象上 <code>msg</code> 属性发生了改变，插值处的内容都会更新。</p>
 <p>通过使用 <a href="../api/#v-once">v-once 指令</a>，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新。但请留心这会影响到该节点上所有的数据绑定：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-once</span>&gt;</span>这个将不会改变: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="原始-HTML"><a href="#原始-HTML" class="headerlink" title="原始 HTML"></a>原始 HTML</h3><p>双大括号会将数据解释为普通文本，而非 HTML 代码。为了输出真正的 HTML ，你需要使用 <code>v-html</code> 指令：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"rawHtml"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这个 <code>div</code> 的内容将会被替换成为属性值 <code>rawHtml</code>，直接作为 HTML——会忽略解析属性值中的数据绑定。注意，你不能使用 <code>v-html</code> 来复合局部模板，因为 Vue 不是基于字符串的模板引擎。反之，对于用户界面 (UI)，组件更适合作为可重用和可组合的基本单位。</p>
+<h3 id="原始-HTML"><a href="#原始-HTML" class="headerlink" title="原始 HTML"></a>原始 HTML</h3><p>双大括号会将数据解释为普通文本，而非 HTML 代码。为了输出真正的 HTML，你需要使用 <code>v-html</code> 指令：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Using mustaches: &#123;&#123; rawHtml &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Using v-html directive: <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-html</span>=<span class="string">"rawHtml"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<div id="example1" class="demo">
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+</div>
+<script>
+new Vue({
+  el: '#example1',
+  data: function () {
+   return {
+     rawHtml: '<span style="color: red">This should be red.</span>'
+   }
+  }
+})
+</script>
+
+<p>这个 <code>span</code> 的内容将会被替换成为属性值 <code>rawHtml</code>，直接作为 HTML——会忽略解析属性值中的数据绑定。注意，你不能使用 <code>v-html</code> 来复合局部模板，因为 Vue 不是基于字符串的模板引擎。反之，对于用户界面 (UI)，组件更适合作为可重用和可组合的基本单位。</p>
 <p class="tip">你的站点上动态渲染的任意 HTML 可能会非常危险，因为它很容易导致 <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="external">XSS 攻击</a>。请只对可信内容使用 HTML 插值，<strong>绝不要</strong>对用户提供的内容使用插值。</p>
 
 <h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 <a href="../api/#v-bind">v-bind 指令</a>：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"dynamicId"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这同样适用于布尔类特性，如果求值结果是 falsy 的值 (译者注：falsy 不是 <code>false</code>，<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy" target="_blank" rel="external">参考这里</a>)，则该特性将会被删除：</p>
+<p>在布尔特性的情况下，它们的存在即暗示为 <code>true</code>，<code>v-bind</code> 工作起来略有不同，在这个例子中：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:disabled</span>=<span class="string">"isButtonDisabled"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如果 <code>isButtonDisabled</code> 的值是 <code>null</code>、<code>undefined</code> 或 <code>false</code>，则 <code>disabled</code> 特性甚至不会被包含在渲染出来的 <code>&lt;button&gt;</code> 元素中。</p>
 <h3 id="使用-JavaScript-表达式"><a href="#使用-JavaScript-表达式" class="headerlink" title="使用 JavaScript 表达式"></a>使用 JavaScript 表达式</h3><p>迄今为止，在我们的模板中，我们一直都只绑定简单的属性键值。但实际上，对于所有的数据绑定，Vue.js 都提供了完全的 JavaScript 表达式支持。</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line">&#123;&#123; number + 1 &#125;&#125;</div><div class="line"></div><div class="line">&#123;&#123; ok ? 'YES' : 'NO' &#125;&#125;</div><div class="line"></div><div class="line">&#123;&#123; message.split('').reverse().join('') &#125;&#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"'list-' + id"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这些表达式会在所属 Vue 实例的数据作用域下作为 JavaScript 被解析。有个限制就是，每个绑定都只能包含<strong>单个表达式</strong>，所以下面的例子都<strong>不会</strong>生效。</p>
