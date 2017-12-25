@@ -488,6 +488,7 @@ body.docs #nav {
 }
 .nav-link {
   padding-bottom: 3px;
+  white-space: nowrap;
 }
 .nav-link:hover,
 .nav-link.current {
@@ -851,14 +852,13 @@ ul.demo li {
 }
 .sidebar .main-sponsor .logo {
   color: #7f8c8d;
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
   font-weight: bold;
   display: block;
 }
 .sidebar .main-sponsor .logo:last-child {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .sidebar .main-sponsor img,
 .sidebar .main-sponsor a {
@@ -1249,7 +1249,9 @@ ul.demo li {
   pointer-events: none;
 }
 .content h2 a,
-.content h3 a {
+.content h3 a,
+.content h2 button,
+.content h3 button {
   pointer-events: auto;
   color: #2c3e50;
 }
